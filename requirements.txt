@@ -5,3 +5,5 @@
 #
 # Note: The `lib` directory is added to `sys.path` by `appengine_config.py`.
 Flask==0.10
+pytz==2015.4
+iso8601==0.1.10

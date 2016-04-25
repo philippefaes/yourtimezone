@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
+		<title>Your Time Zone</title>
+	</head>
+	<!-- <link href="/css/style.css" rel="stylesheet" type="text/css"> -->
+	<body>
+		<div style="text-align:center;font-family:sans-serif;font-size:18px">
+		The time in <br/>
+		Your Time Zone at
+			<div id="srcTime">
+				<div style="padding:30px">
+					<div style="font-size:30px">
+						{{theTime.strftime("%H:%M")}}
+						<br/>
+					</div>
+					{% if date %} on {{theTime.date()}}
+					<br/>
+					{% endif %}
+					in {{theTime.tzinfo}}
+				</div>
+			</div>
+			is:
+			<div id="dstDiv"></div>
+
+		</div>
+
+		<!-- script 
+			-->
+		<script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js'></script>
+		<script>
+		    document.getElementById("dstDiv").innerHTML="xmlhttp.responseText";
+			zonename = jstz.determine().name();
+			var xmlhttp;
+			if (window.XMLHttpRequest){
+			  // code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+			}else{
+			  // code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function(){
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			    document.getElementById("dstDiv").innerHTML=xmlhttp.responseText;
+			  }
+			};
+			xmlhttp.open("GET","/test/{{theTime.__str__()}}/"+zonename,true);
+			xmlhttp.send();
+		</script>
+	</body>
+</html>

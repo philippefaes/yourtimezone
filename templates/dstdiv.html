@@ -1,0 +1,8 @@
+<div id="dstDiv">
+	<div style="font-size:40px">
+		{{newTime.strftime("%H:%M")}}
+	</div>
+	{% if date %} on {{newTime.date()}}
+	<br/>
+	{% endif %} in {{newTime.tzinfo}}
+</div>
